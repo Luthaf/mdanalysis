@@ -6,55 +6,16 @@ Loading Gromacs files in MDAnalysis
 
 MDAnalysis is able to read most files used by Gromacs with the exception
 of the TNG format which is currently in development.
+The TPR file provides a wide variety of topology attributes
+and should be used where possible,
+however it is also possible to use either a GRO or similar ASCII file.
+For the trajectory either an XTC or TRR file can be used,
+with the latter also providing velocities and forces if these were saved.
 
-
-.. _load_gro:
-
-
-Reading GRO files
------------------
-
-Stuff about the GRO format specifically
-
-When used as a topology file in a Universe, MDAnalysis will read
-``names``, ``ids``, ``resids`` and ``resnames``,
-and guess ``masses`` and ``types`` based on the names of atoms.
-The ``segid`` for of all atoms is set to "``SYSTEM``".
-
-For implementation details see
-:mod:`MDAnalysis.topology.GROParser`.
-
-
-Writing GRO files
-^^^^^^^^^^^^^^^^^
-
-MDAnalysis can also write GRO files, for example using the
-:meth:`~MDAnalysis.core.groups.AtomGroup.write` method.
-It will attempt to use the ``name``, ``resname`` and ``resid`` attribute
-from atoms if available, otherwise default values of "``X``", "``UNK``"
-and "``1``" respectively will be used.
-If the provided atoms have velocities these will also be written,
-otherwise only the positions will be written.
-The precision is limited to three decimal places.
-
-By default any written GRO files will renumber the atom ids to move sequentially
-from 1.  This can be disabled, and instead the original atom ids kept, by
-using the ``reindex=False`` keyword argument.  This is useful when writing a
-subsection of a larger Universe while wanting to preserve the original
-identities of atoms.
-
-For example::
-
-   >>> u = mda.Universe()`
-
-   >>> u.atoms.write('out.gro', reindex=False)
-
-   # OR
-   >>> with mda.Writer('out.gro', reindex=False) as w:
-   ...     w.write(u.atoms)
-
-
-
+.. seealso::
+   `Loading PDB files <load_databank>`
+   `Loading XYZ flies <load_xyz>`
+   
 
 .. _load_tpr:
 
@@ -116,6 +77,54 @@ Bonded interactions available in Gromacs are described in table 5.5 of the
   (type 3), Fourier dihedrals (type 5), restricted dihedrals (type 10),
   combined bending-torsion potentials (type 11), tabulated dihedral (type 8)
 * impropers: improper dihedrals (type 2), periodic improper dihedrals (type 4)
+
+.. _load_gro:
+
+
+Reading GRO files
+-----------------
+
+Stuff about the GRO format specifically
+
+When used as a topology file in a Universe, MDAnalysis will read
+``names``, ``ids``, ``resids`` and ``resnames``,
+and guess ``masses`` and ``types`` based on the names of atoms.
+The ``segid`` for of all atoms is set to "``SYSTEM``".
+
+For implementation details see
+:mod:`MDAnalysis.topology.GROParser`.
+
+
+Writing GRO files
+^^^^^^^^^^^^^^^^^
+
+MDAnalysis can also write GRO files, for example using the
+:meth:`~MDAnalysis.core.groups.AtomGroup.write` method.
+It will attempt to use the ``name``, ``resname`` and ``resid`` attribute
+from atoms if available, otherwise default values of "``X``", "``UNK``"
+and "``1``" respectively will be used.
+If the provided atoms have velocities these will also be written,
+otherwise only the positions will be written.
+The precision is limited to three decimal places.
+
+By default any written GRO files will renumber the atom ids to move sequentially
+from 1.  This can be disabled, and instead the original atom ids kept, by
+using the ``reindex=False`` keyword argument.  This is useful when writing a
+subsection of a larger Universe while wanting to preserve the original
+identities of atoms.
+
+For example::
+
+   >>> u = mda.Universe()`
+
+   >>> u.atoms.write('out.gro', reindex=False)
+
+   # OR
+   >>> with mda.Writer('out.gro', reindex=False) as w:
+   ...     w.write(u.atoms)
+
+
+
 
 .. Links
 .. _Gromacs: http://www.gromacs.org
