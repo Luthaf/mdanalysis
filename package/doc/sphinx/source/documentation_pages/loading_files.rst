@@ -36,7 +36,7 @@ and a path to the DCD results to act as the trajectory
 Single file Universes
 ---------------------
 
-Occaisionally a file may contain both topology and trajectory information,
+Occasionally a file may contain both topology and trajectory information,
 in such cases it is sufficient to provide only a single filename to Universe
 ::
 

@@ -1,7 +1,7 @@
 .. _load_charmm:
 
 ####################################
-Loading Charmm files with MDAnalysis
+Loading CHARMM files with MDAnalysis
 ####################################
 
 .. _load_psf:

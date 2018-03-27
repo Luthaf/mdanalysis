@@ -1,7 +1,7 @@
 .. _load_lammps:
 
 ####################################
-Loading Lammps files with MDAnalysis
+Loading LAMMPS files with MDAnalysis
 ####################################
 
 .. _load_data:
